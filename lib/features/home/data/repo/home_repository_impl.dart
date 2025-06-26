@@ -6,6 +6,7 @@ import 'package:movie_app/features/home/data/datasources/home_local_datasource.d
 import 'package:movie_app/features/home/data/datasources/home_remote_datasource.dart';
 import 'package:movie_app/features/home/data/models/MovieModel.dart';
 import 'package:movie_app/features/home/domain/entities/Movie_entity.dart';
+import 'package:movie_app/features/home/domain/entities/people_entity.dart';
 import 'package:movie_app/features/home/domain/repositories/home_repository.dart';
 
 
@@ -52,6 +53,27 @@ class HomeRepositoryImpl extends HomeRepository {
       try {
         print("No Internet Connection");
         final localTemplate = await localDataSource.getLastMovieList(key: "upcomingMovies");
+        return Right(localTemplate);
+      } on CacheExeption catch (e) {
+        return Left(Failure(errMessage: e.errorMessage));
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<PeopleEntity>>> getTrendingPerson() async {
+    if (await networkInfo.isConnected!) {
+      try {
+        final remoteTrendingPerson = await remoteDataSource.getTrendingPerson();
+        localDataSource.cachePeople(remoteTrendingPerson, key: "trendingPeople");
+        return Right(remoteTrendingPerson);
+      } on ServerException catch (e) {
+        return Left(Failure(errMessage: e.errorModel.errorMessage));
+      }
+    } else {
+      try {
+        print("No Internet Connection");
+        final localTemplate = await localDataSource.getLastPeopleList(key: "trendingPeople");
         return Right(localTemplate);
       } on CacheExeption catch (e) {
         return Left(Failure(errMessage: e.errorMessage));

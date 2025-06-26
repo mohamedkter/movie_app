@@ -5,6 +5,7 @@ import 'package:movie_app/core/utils/icons/app_icons.dart';
 import 'package:movie_app/core/utils/theme/app_theme.dart';
 import 'package:movie_app/features/favorites/presentation/screens/favorite_screen.dart';
 import 'package:movie_app/features/home/presentation/bloc/trending_cubit.dart';
+import 'package:movie_app/features/home/presentation/bloc/trending_people_cubit.dart';
 import 'package:movie_app/features/home/presentation/bloc/upcoming_cubit.dart';
 import 'package:movie_app/features/home/presentation/screens/home_screen.dart';
 
@@ -49,6 +50,9 @@ class _MovieAppState extends State<MovieAppMainScreen> {
         ),
         BlocProvider(
           create: (context) => UpcomingCubit(),
+        ),
+        BlocProvider(
+          create: (context) => TrendingPeopleCubit(),
         ),
       ],
       child: const HomeScreen(),

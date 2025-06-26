@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:movie_app/core/api/api_consumer.dart';
 import 'package:movie_app/features/home/data/models/MovieModel.dart';
+import 'package:movie_app/features/home/data/models/people_model.dart';
 
 // class HomeRemoteDatasource{
 //   final DioConsumer apiConsumer ;
@@ -34,5 +35,9 @@ class HomeRemoteDataSource {
     final response = await api.get("/movie/upcoming?language=en-US&page=1");
 
     return response["results"].map<MovieModel>((e) => MovieModel.fromMap(e)).toList();
+  }
+  Future<List<PeopleModel>> getTrendingPerson() async {
+    final response = await api.get("/trending/person/day?language=en-US");
+    return response["results"].map<PeopleModel>((e) => PeopleModel.fromJson(e)).toList();
   }
 }

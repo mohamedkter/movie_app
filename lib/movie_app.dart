@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/utils/icons/app_icons.dart';
 import 'package:movie_app/core/utils/theme/app_theme.dart';
 import 'package:movie_app/features/favorites/presentation/screens/favorite_screen.dart';
-import 'package:movie_app/features/home/presentation/bloc/home_cubit.dart';
+import 'package:movie_app/features/home/presentation/bloc/trending_cubit.dart';
+import 'package:movie_app/features/home/presentation/bloc/upcoming_cubit.dart';
 import 'package:movie_app/features/home/presentation/screens/home_screen.dart';
 
 class MovieApp extends StatelessWidget {
@@ -16,37 +17,40 @@ class MovieApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-    
       builder: (context, child) {
         return MaterialApp(
-          title: 'Movie App',
-          theme: darkTheme,
-          home: const MovieAppMainScreen(),
-          builder: (context, widget) {
-            return MediaQuery(
-              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-              child: widget!,
-            );
-          }
-        );
+            title: 'Movie App',
+            theme: darkTheme,
+            home: const MovieAppMainScreen(),
+            builder: (context, widget) {
+              return MediaQuery(
+                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                child: widget!,
+              );
+            });
       },
     );
   }
 }
 
-
-
 class MovieAppMainScreen extends StatefulWidget {
   const MovieAppMainScreen({super.key});
 
   @override
-  State<MovieAppMainScreen> createState() => _MyAppState();
+  State<MovieAppMainScreen> createState() => _MovieAppState();
 }
 
-class _MyAppState extends State<MovieAppMainScreen> {
+class _MovieAppState extends State<MovieAppMainScreen> {
   List<Widget> pages = [
-    BlocProvider(
-      create: (context) => HomeCubit(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => TrendingCubit(),
+        ),
+        BlocProvider(
+          create: (context) => UpcomingCubit(),
+        ),
+      ],
       child: const HomeScreen(),
     ),
     const FavoriteScreen(),
@@ -98,9 +102,18 @@ class _MyAppState extends State<MovieAppMainScreen> {
           });
         },
         items: [
-          BottomNavigationBarItem(icon: AppIcons.home(color:currentIndex==0? Theme.of(context).colorScheme.primary:Colors.white), label: "Home"),
           BottomNavigationBarItem(
-              icon: AppIcons.favorite(color: currentIndex==1? Theme.of(context).colorScheme.primary:Colors.white), label: "Favorites"),
+              icon: AppIcons.home(
+                  color: currentIndex == 0
+                      ? Theme.of(context).colorScheme.primary
+                      : Colors.white),
+              label: "Home"),
+          BottomNavigationBarItem(
+              icon: AppIcons.favorite(
+                  color: currentIndex == 1
+                      ? Theme.of(context).colorScheme.primary
+                      : Colors.white),
+              label: "Favorites"),
         ],
       ),
     );

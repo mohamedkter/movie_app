@@ -54,4 +54,29 @@ class AppIcons {
       color: color,
     );
   }
+  static Widget play({double size = 24.0, Color? color}) {
+    return SvgPicture.asset(
+      'assets/icons/play-circle-icon.svg',
+      width: size,
+      height: size,
+      color: color,
+    );
+  }
+  static Widget roundedArrowLeft({double size = 24.0, Color? color}) {
+    return SvgPicture.asset(
+      'assets/icons/round-alt-arrow-left-icon.svg',
+      width: size,
+      height: size,
+      color: color,
+    );
+  }
+  static Widget roundedArrowRight({double size = 24.0, Color? color}) {
+    return SvgPicture.asset(
+      'assets/icons/round-alt-arrow-right-icon.svg',
+      width: size,
+      height: size,
+      color: color,
+    );
+  }
+  
 }

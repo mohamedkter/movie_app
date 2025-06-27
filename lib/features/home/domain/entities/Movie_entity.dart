@@ -7,9 +7,9 @@ class MovieEntity {
 
   MovieEntity({
     required this.id,
-    required this.title,
-    required this.poster_path,
-    required this.popularity,
-    required this.vote_average,
+    this.title,
+    this.poster_path,
+    this.popularity,
+    this.vote_average,
   });
 }

@@ -11,6 +11,7 @@ import 'package:movie_app/features/home/presentation/bloc/upcoming_cubit.dart';
 import 'package:movie_app/features/home/presentation/bloc/upcoming_states.dart';
 import 'package:movie_app/features/home/presentation/widgets/custom_header.dart';
 import 'package:movie_app/features/home/presentation/widgets/custom_search_widget.dart';
+import 'package:movie_app/features/home/presentation/widgets/trending_cast_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -81,57 +82,7 @@ class TrendingMovieStarsSection extends StatelessWidget {
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: state.trendingPeople.length,
-                      itemBuilder: (context, index) => SizedBox(
-                        width: 120.w,
-                        child: Column(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Theme.of(context)
-                                        .colorScheme
-                                        .secondaryContainer
-                                        .withOpacity(0.5),
-                                    Theme.of(context)
-                                        .colorScheme
-                                        .primary
-                                        .withOpacity(0.2),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                borderRadius: BorderRadius.circular(100.r),
-                                border: Border.all(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .primary
-                                      .withOpacity(0.5),
-                                  width: 3,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: CircleAvatar(
-                                  radius: 50.r,
-                                  backgroundImage: NetworkImage(
-                                      "https://image.tmdb.org/t/p/w500${state.trendingPeople[index].profilePath}"),
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 5.h),
-                            Text(
-                              state.trendingPeople[index].name,
-                              style: TextStyle(
-                                color: Theme.of(context).colorScheme.onSurface,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ),
+                      itemBuilder: (context, index) => TrendingCastCard(people: state.trendingPeople[index],),
                       separatorBuilder: (context, index) =>
                           SizedBox(width: 16.w),
                     ),
@@ -147,6 +98,7 @@ class TrendingMovieStarsSection extends StatelessWidget {
     );
   }
 }
+
 
 class TrendingSection extends StatelessWidget {
   const TrendingSection({

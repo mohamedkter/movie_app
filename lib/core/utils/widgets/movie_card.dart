@@ -21,10 +21,7 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigator.of(context).push(MaterialPageRoute(
-        //     builder: (context) => Details(
-        //           Movie: Movie!,
-        //         )));
+        Navigator.pushNamed(context, '/movieDetails', arguments: movie?.id);
       },
       child: Container(
         decoration: BoxDecoration(

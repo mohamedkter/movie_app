@@ -4,7 +4,7 @@ import 'package:movie_app/core/errors/expentions.dart';
 import 'package:movie_app/core/errors/failure.dart';
 import 'package:movie_app/features/home/data/datasources/home_local_datasource.dart';
 import 'package:movie_app/features/home/data/datasources/home_remote_datasource.dart';
-import 'package:movie_app/features/home/data/models/MovieModel.dart';
+import 'package:movie_app/core/utils/models/MovieModel.dart';
 import 'package:movie_app/features/home/domain/entities/Movie_entity.dart';
 import 'package:movie_app/features/home/domain/entities/people_entity.dart';
 import 'package:movie_app/features/home/domain/repositories/home_repository.dart';

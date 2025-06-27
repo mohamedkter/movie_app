@@ -1,25 +1,9 @@
 import 'dart:developer';
 
 import 'package:movie_app/core/api/api_consumer.dart';
-import 'package:movie_app/features/home/data/models/MovieModel.dart';
+import 'package:movie_app/core/utils/models/MovieModel.dart';
 import 'package:movie_app/features/home/data/models/people_model.dart';
 
-// class HomeRemoteDatasource{
-//   final DioConsumer apiConsumer ;
-//   HomeRemoteDatasource({required this.apiConsumer});
-//   Future<Either<List<MovieModel>, Failure>> fetchData( ) async {
-//      try {
-//        final response = await apiConsumer.get(
-//          'trending/movie/day?language=en-US',
-//        );
-//        print(response);
-//        return Left(response.data["results"].map<MovieModel>((e) => MovieModel.fromMap(e)).toList()); 
-//      } catch (error) {
-//       print(error);
-//        return Right(Failure(errMessage: error.toString()));
-//      }
-//   }
-// }
 class HomeRemoteDataSource {
   final ApiConsumer api;
 

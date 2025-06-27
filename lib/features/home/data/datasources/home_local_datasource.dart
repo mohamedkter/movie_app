@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:movie_app/core/cache/cache_helper.dart';
-import 'package:movie_app/features/home/data/models/MovieModel.dart';
+import 'package:movie_app/core/utils/models/MovieModel.dart';
 import 'package:movie_app/features/home/data/models/people_model.dart';
 import '../../../../core/errors/expentions.dart';
 

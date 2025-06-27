@@ -1,3 +1,4 @@
+
 import 'package:movie_app/features/home/domain/entities/Movie_entity.dart';
 
 class MovieModel extends MovieEntity {
@@ -19,7 +20,7 @@ class MovieModel extends MovieEntity {
     this.release_date,
     this.backdrop_path,
     this.vote_average,
-  }) : super(id: id, title: title, poster_path: poster_path, popularity: popularity, vote_average: vote_average) ;
+  }) : super(id: id, title: title , poster_path: poster_path, popularity: popularity, vote_average: vote_average) ;
 
   factory MovieModel.fromMap(Map<String, dynamic> map) {
     return MovieModel(

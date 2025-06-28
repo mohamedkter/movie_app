@@ -20,7 +20,7 @@ class RecommendedMoviesSection extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: Column(
         children: [
-          const CustomHeader(HeaderTitle: "Recommended Movies"),
+           CustomHeader(headerTitle: "Recommended Movies",onViewMoreTab:(){}),
           BlocBuilder<RecommendedMoviesCubit, RecommendedMoviesState>(
             builder: (context, state) {
               if (state is RecommendedMoviesLoadingState) {

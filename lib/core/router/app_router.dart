@@ -6,6 +6,8 @@ import 'package:movie_app/features/details/ui/bloc/recommended_movies_cubit.dart
 import 'package:movie_app/features/details/ui/bloc/similar_movies_cubit.dart';
 import 'package:movie_app/features/details/ui/screen/details_screen.dart';
 import 'package:movie_app/features/home/presentation/screens/main_screen.dart';
+import 'package:movie_app/features/view_more/actors/ui/bloc/actor_pagination_cubit.dart';
+import 'package:movie_app/features/view_more/actors/ui/screen/view_more_actors_screen.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -27,6 +29,18 @@ class AppRouter {
             child: DetailsScreen(movieId: movieId),
           ),
         );
+       case AppRoutes.viewMoreActorsScreen:
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => ActorPaginationCubit(),
+              ),
+          
+            ],
+            child: const ViewMoreActorsScreen(),
+          ),
+        ); 
 
       default:
         return MaterialPageRoute(

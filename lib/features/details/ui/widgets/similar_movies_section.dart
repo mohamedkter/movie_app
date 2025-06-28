@@ -18,7 +18,7 @@ class SimilarMoviesSection extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: Column(
         children: [
-          const CustomHeader(HeaderTitle: "Similar Movies"),
+           CustomHeader(headerTitle: "Similar Movies",onViewMoreTab:(){}),
           BlocBuilder<SimilarMoviesCubit, SimilarMoviesState>(
             builder: (context, state) {
               if (state is SimilarMoviesLoadingState) {

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/core/router/app_routes.dart';
 import 'package:movie_app/core/utils/widgets/list_card_shimmer_loading_widget.dart';
 import 'package:movie_app/core/utils/widgets/movie_card.dart';
 import 'package:movie_app/features/home/presentation/bloc/trending_cubit.dart';
@@ -69,7 +70,9 @@ class TrendingMovieStarsSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          const CustomHeader(HeaderTitle: "Trending Movie Stars"),
+           CustomHeader(headerTitle: "Trending Movie Stars",onViewMoreTab:(){
+            Navigator.of(context).pushNamed(AppRoutes.viewMoreActorsScreen);
+           }),
           BlocBuilder<TrendingPeopleCubit, TrendingPeopleState>(
             builder: (context, state) {
               if (state is TrendingPeopleLoadingState) {
@@ -111,7 +114,7 @@ class TrendingSection extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: Column(
         children: [
-          const CustomHeader(HeaderTitle: "Trending Movies"),
+           CustomHeader(headerTitle: "Trending Movies",onViewMoreTab:(){}),
           BlocBuilder<TrendingCubit, TrendingState>(
             builder: (context, state) {
               if (state is TrendingLoadingState) {
@@ -153,7 +156,7 @@ class UpcomingSection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
         children: [
-          const CustomHeader(HeaderTitle: "Upcoming Movies"),
+          CustomHeader(headerTitle: "Upcoming Movies",onViewMoreTab:(){}),
           BlocBuilder<UpcomingCubit, UpcomingStates>(
             builder: (context, state) {
               if (state is UpcomingLoadingState) {

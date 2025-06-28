@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/icons/app_icons.dart';
+import 'package:movie_app/core/utils/widgets/custom_appBar.dart';
 import 'package:movie_app/features/details/data/models/video_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -139,28 +140,7 @@ class _TrailerScreenState extends State<TrailerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          currentVideo.type,
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-        centerTitle: true,
-        leading: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop();
-            },
-            child: AppIcons.roundedArrowLeft(
-              color: Theme.of(context).colorScheme.primary,
-              size: 20,
-            ),
-          ),
-        ),
-      ),
+      appBar:CustomAppBar(title: currentVideo.type,),
       body: Column(
         children: [
           YoutubePlayer(

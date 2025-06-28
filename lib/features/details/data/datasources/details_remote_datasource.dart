@@ -11,8 +11,9 @@ class DetailsRemoteDataSource {
    final responses = await Future.wait([
     api.get("/movie/$movieId?language=en-US"),
     api.get("/movie/$movieId/credits?language=en-US"),
+    api.get("/movie/$movieId/videos"),
   ]);
-    return DetailsMovieModel.fromJson(responses[0], responses[1]);
+    return DetailsMovieModel.fromJson(responses[0], responses[1],responses[2]);
   }
   Future<List<MovieModel>> getSimilarMovies(int movieId) async {
     final response = await api.get("/movie/$movieId/similar");

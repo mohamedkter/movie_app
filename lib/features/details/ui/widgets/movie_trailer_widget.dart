@@ -3,15 +3,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/utils/icons/app_icons.dart';
 import 'package:movie_app/features/details/data/models/genre.dart';
 import 'package:movie_app/features/details/domain/entities/details_movie_entity.dart';
+import 'package:movie_app/features/details/ui/screen/trailer_screen.dart';
+import 'package:movie_app/features/details/ui/widgets/not_found_video_dialog.dart';
 
 class MovieTrailerWidget extends StatefulWidget {
   final DetailsMovieEntity? movieDetails;
-  final bool is_Favorite;
-  final VoidCallback IconButtonFunction;
+  final bool isFavorite;
+  final VoidCallback iconButtonFunction;
   const MovieTrailerWidget({
     super.key,
-    required this.is_Favorite,
-    required this.IconButtonFunction,
+    required this.isFavorite,
+    required this.iconButtonFunction,
     required this.movieDetails,
   });
 
@@ -60,9 +62,9 @@ class _MovieTrailerWidgetState extends State<MovieTrailerWidget> {
                         size: 30,
                       )),
                   IconButton(
-                    onPressed: widget.IconButtonFunction,
+                    onPressed: widget.iconButtonFunction,
                     icon: Icon(
-                      widget.is_Favorite == false
+                      widget.isFavorite == false
                           ? Icons.favorite_border
                           : Icons.favorite_rounded,
                       color: Theme.of(context).colorScheme.primary,
@@ -80,7 +82,23 @@ class _MovieTrailerWidgetState extends State<MovieTrailerWidget> {
               children: [
                 InkWell(
                   onTap: () {
-                    print("Tralier");
+                    if (widget.movieDetails?.videos != null &&
+                        widget.movieDetails!.videos!.isNotEmpty) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => TrailerScreen(
+                            videos: widget.movieDetails!.videos!,
+                          ),
+                        ),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const NotFoundVideoDialog();
+                        },
+                      );
+                    }
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -130,12 +148,16 @@ class _MovieTrailerWidgetState extends State<MovieTrailerWidget> {
                   const SizedBox(
                     height: 3,
                   ),
-                  Text(
-                    connectnetGenres(widget.movieDetails?.genres ?? []),
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .copyWith(color: Colors.grey.shade500, fontSize: 12),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                    child: Text(
+                      connectnetGenres(widget.movieDetails?.genres ?? []),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(color: Colors.grey.shade500, fontSize: 12),
+                    ),
                   ),
                   Text(
                     "${widget.movieDetails?.originalLanguage?.toUpperCase() ?? 'N/A'}   |   ${handleRuntime(widget.movieDetails?.runtime)}",

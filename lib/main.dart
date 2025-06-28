@@ -1,6 +1,5 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_app/core/cache/cache_helper.dart';
 import 'package:movie_app/movie_app.dart';
 

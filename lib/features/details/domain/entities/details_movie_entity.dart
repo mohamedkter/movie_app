@@ -1,6 +1,7 @@
 import 'package:movie_app/features/details/data/models/cast_model.dart';
 import 'package:movie_app/features/details/data/models/genre.dart';
 import 'package:movie_app/features/details/data/models/production_company.dart';
+import 'package:movie_app/features/details/data/models/video_model.dart';
 
 class DetailsMovieEntity {
   final String? backdropPath;
@@ -15,12 +16,14 @@ class DetailsMovieEntity {
   final List<ProductionCompany>? productionCompany;
   final List<Genre>? genres;
   final List<CastModel>? cast;
+  final List<VideoModel>? videos;
   DetailsMovieEntity(
       {required this.backdropPath,
       required this.releaseDate,
       required this.genres, 
       required this.cast,
       required this.runtime,
+      required this.videos,
       required this.productionCompany,
       required this.overview,
       required this.popularity,

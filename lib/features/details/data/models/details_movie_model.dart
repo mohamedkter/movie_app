@@ -3,6 +3,7 @@ import 'package:movie_app/features/details/data/models/genre.dart';
 import 'package:movie_app/features/details/data/models/production_company.dart';
 import 'package:movie_app/features/details/data/models/production_country.dart';
 import 'package:movie_app/features/details/data/models/spoken_language.dart';
+import 'package:movie_app/features/details/data/models/video_model.dart';
 import 'package:movie_app/features/details/domain/entities/details_movie_entity.dart';
 
 class DetailsMovieModel extends DetailsMovieEntity {
@@ -32,6 +33,7 @@ class DetailsMovieModel extends DetailsMovieEntity {
   final double voteAverage;
   final int voteCount;
   final List<CastModel>? cast;
+  final List<VideoModel>? videos;
 
   DetailsMovieModel({
     required this.adult,
@@ -60,6 +62,7 @@ class DetailsMovieModel extends DetailsMovieEntity {
     required this.video,
     required this.voteAverage,
     required this.voteCount,
+    required this.videos
   }) : super(
           backdropPath: backdropPath,
           overview: overview,
@@ -73,13 +76,17 @@ class DetailsMovieModel extends DetailsMovieEntity {
           genres: genres,
           runtime: runtime
           , cast: cast,
+          videos: videos
         );
 
-  factory DetailsMovieModel.fromJson(Map<String, dynamic> json,Map<String, dynamic> castJson,) {
+  factory DetailsMovieModel.fromJson(Map<String, dynamic> json,Map<String, dynamic> castJson,Map<String, dynamic> videoJson) {
     return DetailsMovieModel(
       adult: json['adult'],
       backdropPath: json['backdrop_path'],
       budget: json['budget'],
+      videos:videoJson["results"]!=null? (videoJson['results'] as List)
+              .map((e) => VideoModel.fromJson(e))
+              .toList():null ,
       cast:castJson['cast'] != null
           ? (castJson['cast'] as List)
               .map((e) => CastModel.fromJson(e))

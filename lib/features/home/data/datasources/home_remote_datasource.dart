@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:movie_app/core/api/api_consumer.dart';
 import 'package:movie_app/core/utils/models/MovieModel.dart';
 import 'package:movie_app/features/home/data/models/people_model.dart';
@@ -9,8 +7,6 @@ class HomeRemoteDataSource {
 
   HomeRemoteDataSource({required this.api});
   Future<List<MovieModel>> getTrendingMovies() async {
-    Map<String,List<MovieModel>> HomeMovies = {};
-    
     final response = await api.get("/trending/movie/day?language=en-US");
 
     return response["results"].map<MovieModel>((e) => MovieModel.fromMap(e)).toList();

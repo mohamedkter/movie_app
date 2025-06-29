@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/features/details/data/models/cast_model.dart';
@@ -18,7 +19,7 @@ class MovieCastCardWidget extends StatelessWidget {
         color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8.r),
         image: DecorationImage(
-          image: NetworkImage(
+          image: CachedNetworkImageProvider(
             "https://image.tmdb.org/t/p/w500${castMember.profile_path ?? ''}",
           ),
           fit: BoxFit.cover,

@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -108,7 +109,7 @@ class ProductionCompanySection extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(2.r),
                                     color: Colors.grey,
                                     image: DecorationImage(
-                                      image: NetworkImage(
+                                      image: CachedNetworkImageProvider(
                                           "https://image.tmdb.org/t/p/w500${company.logoPath}"),
                                       fit: BoxFit.cover,
                                     )),

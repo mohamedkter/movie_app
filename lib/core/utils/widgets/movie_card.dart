@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/utils/icons/app_icons.dart';
@@ -25,14 +26,18 @@ class MovieCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage(
-                    "https://image.tmdb.org/t/p/w500${movie?.poster_path}"),
-                fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-                color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
-                width: 1)),
+          image: DecorationImage(
+            image: CachedNetworkImageProvider(
+              "https://image.tmdb.org/t/p/w500${movie?.poster_path}",
+            ),
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
+            width: 1,
+          ),
+        ),
         width: MediaQuery.sizeOf(context).width * 0.4,
         child: Padding(
           padding: EdgeInsets.only(left: 2.r, right: 2.r, top: 60.h),
@@ -74,7 +79,7 @@ class MovieCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Padding(
-                        padding:  EdgeInsets.all(5.r),
+                        padding: EdgeInsets.all(5.r),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -94,7 +99,8 @@ class MovieCard extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.sizeOf(context).width * 0.34,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [

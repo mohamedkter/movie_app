@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/services/service_locator.dart';
 import 'package:movie_app/features/details/domain/entities/details_movie_entity.dart';
 import 'package:movie_app/features/details/ui/bloc/movie_details_cubit.dart';
 import 'package:movie_app/features/details/ui/bloc/movie_details_states.dart';

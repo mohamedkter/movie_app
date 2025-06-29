@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/icons/app_icons.dart';
 import 'package:movie_app/features/view_more/actors/domain/entities/actor_entity.dart';
@@ -30,7 +31,7 @@ class _ActorCardState extends State<ActorCard>
               children: [
                 CircleAvatar(
                   radius: 32,
-                  backgroundImage: NetworkImage(
+                  backgroundImage: CachedNetworkImageProvider(
                     "https://image.tmdb.org/t/p/w500${widget.actor.profilePath}",
                   ),
                 ),

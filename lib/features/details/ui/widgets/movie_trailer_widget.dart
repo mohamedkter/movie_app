@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/core/utils/icons/app_icons.dart';
@@ -41,7 +42,7 @@ class _MovieTrailerWidgetState extends State<MovieTrailerWidget> {
       height: 450.h,
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: NetworkImage(
+              image: CachedNetworkImageProvider(
                   "https://image.tmdb.org/t/p/w500${widget.movieDetails?.backdropPath ?? ''}"),
               fit: BoxFit.cover)),
       child: Padding(

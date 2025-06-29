@@ -16,7 +16,7 @@ final VoidCallback onViewMoreTab;
         Text(headerTitle,
             style:Theme.of(context).textTheme.bodyLarge),
         GestureDetector(
-          onTap: () => onViewMoreTab,
+          onTap:onViewMoreTab,
           child: Text("View more",
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Theme.of(context).colorScheme.primary,

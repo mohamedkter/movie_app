@@ -1,6 +1,8 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/services/service_locator.dart';
 import 'package:movie_app/core/utils/icons/app_icons.dart';
 import 'package:movie_app/features/favorites/presentation/screens/favorite_screen.dart';
 import 'package:movie_app/features/home/presentation/bloc/trending_cubit.dart';
@@ -20,13 +22,13 @@ class _MovieAppState extends State<MovieAppMainScreen> {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => TrendingCubit(),
+          create: (context) =>  getIt<TrendingCubit>(),
         ),
         BlocProvider(
-          create: (context) => UpcomingCubit(),
+          create: (context) => getIt<UpcomingCubit>(),
         ),
         BlocProvider(
-          create: (context) => TrendingPeopleCubit(),
+          create: (context) => getIt<TrendingPeopleCubit>(),
         ),
       ],
       child: const HomeScreen(),
@@ -56,7 +58,7 @@ class _MovieAppState extends State<MovieAppMainScreen> {
               Container(
                 margin: const EdgeInsets.only(right: 15),
                 child: const CircleAvatar(
-                  backgroundImage: NetworkImage(
+                  backgroundImage: CachedNetworkImageProvider(
                       "https://img.freepik.com/premium-photo/young-man-isolated-blue_1368-124991.jpg?semt=ais_hybrid&w=740"),
                 ),
               )

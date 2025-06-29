@@ -17,7 +17,7 @@ class HomeRemoteDataSource {
     return response["results"].map<MovieModel>((e) => MovieModel.fromMap(e)).toList();
   }
   Future<List<PeopleModel>> getTrendingPerson() async {
-    final response = await api.get("/trending/person/day?language=en-US");
+    final response = await api.get("/trending/person/day?language=en-US&page=1");
     return response["results"].map<PeopleModel>((e) => PeopleModel.fromJson(e)).toList();
   }
 }

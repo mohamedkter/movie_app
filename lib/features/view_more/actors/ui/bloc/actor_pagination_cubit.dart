@@ -1,33 +1,20 @@
-import 'package:data_connection_checker_tv/data_connection_checker.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/core/api/dio_consumer.dart';
-import 'package:movie_app/core/connection/network_info.dart';
-import 'package:movie_app/features/view_more/actors/data/datasources/actor_remote_dataSource.dart';
-import 'package:movie_app/features/view_more/actors/data/repo/actor_repository_Impl.dart';
 import 'package:movie_app/features/view_more/actors/domain/usecases/get_actors_usecase.dart';
-
-import 'actor_pagination_state.dart';
+import 'package:movie_app/features/view_more/actors/ui/bloc/actor_pagination_state.dart';
 
 class ActorPaginationCubit extends Cubit<ActorPaginationState> {
-
- final actorRepository = ActorRepositoryImpl(
-  remoteDataSource: ActorRemoteDataSourceImpl(api: DioConsumer(dio: Dio())),
-  networkInfo: NetworkInfoImpl(DataConnectionChecker()),
-);
-  late final GetActorsUseCase getActorsUseCase;
+  final GetActorsUseCase getActorsUseCase;
 
   int currentPage = 1;
   bool hasMore = true;
 
-  ActorPaginationCubit()
-      : super(ActorPaginationInitial()) {
-    getActorsUseCase = GetActorsUseCase(actorRepository);
-  }
+  ActorPaginationCubit(this.getActorsUseCase)
+      : super(ActorPaginationInitial());
 
   Future<void> fetchInitialActors() async {
     emit(ActorPaginationLoading());
     currentPage = 1;
+
     final result = await getActorsUseCase.call(page: currentPage);
     result.fold(
       (failure) => emit(ActorPaginationError(failure.errMessage)),
@@ -51,9 +38,7 @@ class ActorPaginationCubit extends Cubit<ActorPaginationState> {
     final result = await getActorsUseCase.call(page: currentPage);
 
     result.fold(
-      (failure) {
-        emit(currentState.copyWith(isLoadingMore: false));
-      },
+      (_) => emit(currentState.copyWith(isLoadingMore: false)),
       (newActors) {
         hasMore = newActors.length >= 20;
         emit(ActorPaginationLoaded(

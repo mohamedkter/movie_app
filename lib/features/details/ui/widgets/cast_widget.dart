@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/features/details/data/models/cast_model.dart';
 
@@ -45,7 +46,7 @@ class CastWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           CircleAvatar(
-                            backgroundImage: NetworkImage(
+                            backgroundImage: CachedNetworkImageProvider(
                                 "https://image.tmdb.org/t/p/w500${cast_items[index].profile_path}"),
                             radius: 30,
                           ),

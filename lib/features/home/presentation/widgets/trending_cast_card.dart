@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_app/features/home/domain/entities/people_entity.dart';
@@ -45,7 +46,7 @@ class TrendingCastCard extends StatelessWidget {
               padding: const EdgeInsets.all(5.0),
               child: CircleAvatar(
                 radius: 50.r,
-                backgroundImage: NetworkImage(
+                backgroundImage: CachedNetworkImageProvider(
                     "https://image.tmdb.org/t/p/w500${people.profilePath}"),
               ),
             ),

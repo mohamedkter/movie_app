@@ -10,7 +10,7 @@ class TrendingCubit extends Cubit<TrendingState> {
   Future<void> eitherFailureOrTrending() async {
     emit(TrendingLoadingState());
 
-    final trendingResult = await getTrendingMovies.call();
+    final trendingResult = await getTrendingMovies.call(page: 1);
 
     trendingResult.fold(
       (failure) => emit(TrendingErrorState(error: failure.errMessage)),

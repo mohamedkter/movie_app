@@ -29,6 +29,7 @@ import 'package:movie_app/features/view_more/actors/data/repo/actor_repository_I
 import 'package:movie_app/features/view_more/actors/domain/repo/actor_repository.dart';
 import 'package:movie_app/features/view_more/actors/domain/usecases/get_actors_usecase.dart';
 import 'package:movie_app/features/view_more/actors/ui/bloc/actor_pagination_cubit.dart';
+import 'package:movie_app/features/view_more/movies/ui/bloc/view_more_movies_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -79,9 +80,8 @@ void setupLocator() {
     ),
   );
 
-
   //Show more
-  
+
   getIt.registerLazySingleton<ActorRepository>(
     () => ActorRepositoryImpl(
       remoteDataSource: getIt(),
@@ -142,4 +142,8 @@ void setupLocator() {
   getIt.registerFactory<ActorPaginationCubit>(
     () => ActorPaginationCubit(getIt()),
   );
+  getIt.registerFactory<ViewMoreMoviesCubit>(() => ViewMoreMoviesCubit(
+        getTrendingMovies: getIt(),
+        getUpcomingMovies: getIt(),
+      ));
 }

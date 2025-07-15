@@ -6,7 +6,7 @@ import 'package:movie_app/features/home/domain/repositories/home_repository.dart
 class GetTrendingMovies{
  final HomeRepository repository ;
   GetTrendingMovies({required this.repository});
-  Future<Either<Failure,List<MovieEntity>>> call()  {
-     return  repository.getTrendingMovies();
+  Future<Either<Failure,List<MovieEntity>>> call({required int page})  {
+     return  repository.getTrendingMovies(page:page);
   }
 }

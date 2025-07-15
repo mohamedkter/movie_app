@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/utils/icons/app_icons.dart';
 import 'package:movie_app/core/utils/widgets/custom_appBar.dart';
 import 'package:movie_app/features/details/data/models/video_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';

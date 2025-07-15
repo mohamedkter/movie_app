@@ -20,10 +20,10 @@ class HomeRepositoryImpl extends HomeRepository {
       required this.localDataSource,
       required this.networkInfo});
   @override
-  Future<Either<Failure, List<MovieModel>>> getTrendingMovies() async {
+  Future<Either<Failure, List<MovieModel>>> getTrendingMovies({required int page}) async {
     if (await networkInfo.isConnected!) {
       try {
-        final remoteTrendingMovies = await remoteDataSource.getTrendingMovies();
+        final remoteTrendingMovies = await remoteDataSource.getTrendingMovies(page: page);
         localDataSource.cacheMovie(remoteTrendingMovies, key: "trendingMovies");
         return Right(remoteTrendingMovies);
       } on ServerException catch (e) {
@@ -40,10 +40,10 @@ class HomeRepositoryImpl extends HomeRepository {
     }
   }
   @override
-  Future<Either<Failure, List<MovieEntity>>> getUpcomingMovies() async {
+  Future<Either<Failure, List<MovieEntity>>> getUpcomingMovies({required int page}) async {
     if (await networkInfo.isConnected!) {
       try {
-        final remoteUpcomingMovies = await remoteDataSource.getUpcomingMovies();
+        final remoteUpcomingMovies = await remoteDataSource.getUpcomingMovies(page: page);
         localDataSource.cacheMovie(remoteUpcomingMovies, key: "upcomingMovies");
         return Right(remoteUpcomingMovies);
       } on ServerException catch (e) {

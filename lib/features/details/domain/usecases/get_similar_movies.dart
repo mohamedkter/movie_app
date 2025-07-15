@@ -8,7 +8,7 @@ class GetSimilarMovies {
 
   GetSimilarMovies({required this.repository});
 
-  Future<Either<Failure, List<MovieEntity>>> call(int movieId) {
-    return repository.getSimilarMovies(movieId);
+  Future<Either<Failure, List<MovieEntity>>> call(int movieId,page) {
+    return repository.getSimilarMovies(movieId,page);
   }
 }

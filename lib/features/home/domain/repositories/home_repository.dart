@@ -5,7 +5,7 @@ import '../../../../core/errors/failure.dart';
 
 
 abstract class HomeRepository {
-  Future<Either<Failure, List<MovieEntity>>> getTrendingMovies();
-  Future<Either<Failure, List<MovieEntity>>> getUpcomingMovies();
+  Future<Either<Failure, List<MovieEntity>>> getTrendingMovies({required int page});
+  Future<Either<Failure, List<MovieEntity>>> getUpcomingMovies({required int page});
   Future<Either<Failure, List<PeopleEntity>>> getTrendingPerson();                 
 }

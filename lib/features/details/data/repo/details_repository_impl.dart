@@ -45,11 +45,11 @@ class DetailsRepositoryImpl extends DetailsRepository {
 
   @override
   Future<Either<Failure, List<MovieEntity>>> getSimilarMovies(
-      movieId) async {
+      movieId,page) async {
     if (await networkInfo.isConnected!) {
       try {
         final remoteSimilarMovies =
-            await remoteDataSource.getSimilarMovies(movieId);
+            await remoteDataSource.getSimilarMovies(movieId,page);
         return Right(remoteSimilarMovies);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));
@@ -69,11 +69,11 @@ class DetailsRepositoryImpl extends DetailsRepository {
 
   @override
   Future<Either<Failure, List<MovieEntity>>> getRecommendedMovies(
-      movieId) async {
+      movieId,page) async {
     if (await networkInfo.isConnected!) {
       try {
         final remoteRecommendedMovies =
-            await remoteDataSource.getRecommendedMovies(movieId);
+            await remoteDataSource.getRecommendedMovies(movieId,page);
         return Right(remoteRecommendedMovies);
       } on ServerException catch (e) {
         return Left(Failure(errMessage: e.errorModel.errorMessage));

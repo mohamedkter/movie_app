@@ -6,6 +6,6 @@ import '../../../../core/errors/failure.dart';
 
 abstract class DetailsRepository {
   Future<Either<Failure, DetailsMovieEntity>> getMovieDetails(movieId); 
-  Future<Either<Failure, List<MovieEntity>>> getSimilarMovies(movieId);
-  Future<Either<Failure, List<MovieEntity>>> getRecommendedMovies(movieId);        
+  Future<Either<Failure, List<MovieEntity>>> getSimilarMovies(movieId,page);
+  Future<Either<Failure, List<MovieEntity>>> getRecommendedMovies(movieId,page);        
 }

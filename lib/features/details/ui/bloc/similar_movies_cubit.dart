@@ -10,7 +10,7 @@ class SimilarMoviesCubit extends Cubit<SimilarMoviesState> {
 
   Future<void> fetchSimilarMovies(int movieId) async {
     emit(SimilarMoviesLoadingState());
-    final result = await getSimilarMovies.call(movieId);
+    final result = await getSimilarMovies.call(movieId,1);
     result.fold(
       (failure) =>
           emit(SimilarMovieErrorState(errorMessage: failure.errMessage)),

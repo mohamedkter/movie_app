@@ -15,14 +15,14 @@ class DetailsRemoteDataSource {
   ]);
     return DetailsMovieModel.fromJson(responses[0], responses[1],responses[2]);
   }
-  Future<List<MovieModel>> getSimilarMovies(int movieId) async {
-    final response = await api.get("/movie/$movieId/similar");
+  Future<List<MovieModel>> getSimilarMovies(int movieId ,page) async {
+    final response = await api.get("/movie/$movieId/similar?page=$page");
     final List<dynamic> results = response['results'];
     return results.map((e) => MovieModel.fromMap(e)).toList();
   }
 
-  Future<List<MovieModel>> getRecommendedMovies(int movieId) async {
-    final response = await api.get("/movie/$movieId/recommendations");
+  Future<List<MovieModel>> getRecommendedMovies(int movieId,page) async {
+    final response = await api.get("/movie/$movieId/recommendations?page=$page");
     final List<dynamic> results = response['results'];
     return results.map((e) => MovieModel.fromMap(e)).toList();
   }

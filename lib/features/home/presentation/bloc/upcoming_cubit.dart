@@ -10,7 +10,7 @@ class UpcomingCubit extends Cubit<UpcomingStates> {
   Future<void> eitherFailureOrUpcoming() async {
     emit(UpcomingLoadingState());
 
-    final upcomingResult = await getUpcomingMovies.call();
+    final upcomingResult = await getUpcomingMovies.call(page: 1);
 
     upcomingResult.fold(
       (failure) => emit(UpcomingErrorState(error: failure.errMessage)),

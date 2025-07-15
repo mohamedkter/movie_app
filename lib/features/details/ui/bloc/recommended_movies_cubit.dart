@@ -10,7 +10,7 @@ class RecommendedMoviesCubit extends Cubit<RecommendedMoviesState> {
 
   Future<void> fetchRecommendedMovies(int movieId) async {
     emit(RecommendedMoviesLoadingState());
-    final result = await getRecommendedMovies.call(movieId);
+    final result = await getRecommendedMovies.call(movieId,1);
     result.fold(
       (failure) =>
           emit(RecommendedMovieErrorState(errorMessage: failure.errMessage)),

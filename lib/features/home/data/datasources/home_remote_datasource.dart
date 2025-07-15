@@ -6,13 +6,13 @@ class HomeRemoteDataSource {
   final ApiConsumer api;
 
   HomeRemoteDataSource({required this.api});
-  Future<List<MovieModel>> getTrendingMovies() async {
-    final response = await api.get("/trending/movie/day?language=en-US");
+  Future<List<MovieModel>> getTrendingMovies({required int page}) async {
+    final response = await api.get("/trending/movie/day?language=en-US&page=$page");
 
     return response["results"].map<MovieModel>((e) => MovieModel.fromMap(e)).toList();
   }
-   Future<List<MovieModel>> getUpcomingMovies() async {
-    final response = await api.get("/movie/upcoming?language=en-US&page=1");
+   Future<List<MovieModel>> getUpcomingMovies({required int page}) async {
+    final response = await api.get("/movie/upcoming?language=en-US&page=$page");
 
     return response["results"].map<MovieModel>((e) => MovieModel.fromMap(e)).toList();
   }

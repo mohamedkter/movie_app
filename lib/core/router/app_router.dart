@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/enums/movie_section.dart';
 import 'package:movie_app/core/router/app_routes.dart';
 import 'package:movie_app/core/services/service_locator.dart';
 import 'package:movie_app/features/details/ui/bloc/movie_details_cubit.dart';
@@ -9,6 +10,8 @@ import 'package:movie_app/features/details/ui/screen/details_screen.dart';
 import 'package:movie_app/features/home/presentation/screens/main_screen.dart';
 import 'package:movie_app/features/view_more/actors/ui/bloc/actor_pagination_cubit.dart';
 import 'package:movie_app/features/view_more/actors/ui/screen/view_more_actors_screen.dart';
+import 'package:movie_app/features/view_more/movies/ui/bloc/view_more_movies_cubit.dart';
+import 'package:movie_app/features/view_more/movies/ui/screen/view_more_movies_screen.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -31,6 +34,7 @@ class AppRouter {
             child: DetailsScreen(movieId: movieId),
           ),
         );
+
       case AppRoutes.viewMoreActorsScreen:
         return MaterialPageRoute(
           builder: (_) => MultiBlocProvider(
@@ -42,6 +46,15 @@ class AppRouter {
             child: const ViewMoreActorsScreen(),
           ),
         );
+      case AppRoutes.viewMoreMoviesScreen:
+      MovieSection section =settings.arguments as MovieSection;
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => getIt<ViewMoreMoviesCubit>(),
+                  child:  ViewMoreMoviesScreen(
+                    section: section,
+                  ),
+                ));
 
       default:
         return MaterialPageRoute(

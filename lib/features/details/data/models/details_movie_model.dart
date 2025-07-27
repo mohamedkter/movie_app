@@ -64,6 +64,7 @@ class DetailsMovieModel extends DetailsMovieEntity {
     required this.voteCount,
     required this.videos
   }) : super(
+    id: id,
           backdropPath: backdropPath,
           overview: overview,
           releaseDate: releaseDate,

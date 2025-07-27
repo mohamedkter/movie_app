@@ -118,5 +118,13 @@ class AppIcons {
       color: color,
     );
   }
+  static Widget trash({double size = 24.0, Color? color}) {
+    return SvgPicture.asset(
+      'assets/icons/trash_icon.svg',
+      width: size,
+      height: size,
+      color: color,
+    );
+  }
   
 }

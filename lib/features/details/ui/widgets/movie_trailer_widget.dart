@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/core/firebase/firebase_service.dart';
 import 'package:movie_app/core/utils/icons/app_icons.dart';
+import 'package:movie_app/core/utils/models/MovieModel.dart';
 import 'package:movie_app/features/details/data/models/genre.dart';
 import 'package:movie_app/features/details/domain/entities/details_movie_entity.dart';
 import 'package:movie_app/features/details/ui/screen/trailer_screen.dart';
@@ -63,15 +65,38 @@ class _MovieTrailerWidgetState extends State<MovieTrailerWidget> {
                         size: 30,
                       )),
                   IconButton(
-                    onPressed: widget.iconButtonFunction,
-                    icon: Icon(
-                      widget.isFavorite == false
-                          ? Icons.favorite_border
-                          : Icons.favorite_rounded,
-                      color: Theme.of(context).colorScheme.primary,
-                      size: 30,
-                    ),
-                  )
+  onPressed: () async {
+    if (widget.movieDetails == null) return;
+
+    final model = MovieModel(
+      id: widget.movieDetails!.id,
+      title: widget.movieDetails!.title,
+      poster_path: widget.movieDetails!.posterPath,
+      popularity: widget.movieDetails!.popularity,
+      video: false,
+      release_date: widget.movieDetails!.releaseDate,
+      backdrop_path: widget.movieDetails!.backdropPath,
+      vote_average: widget.movieDetails!.voteAverage,
+      original_language: widget.movieDetails!.originalLanguage,
+    );
+
+    await FirebaseService.addToFavorites(model);
+
+    setState(() {
+      // هنا تقدر تغير لون القلب مثلاً
+      // أو تدي إشعار أنه اتحفظ
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Added to favorites ✅")),
+    );
+  },
+  icon: Icon(
+    widget.isFavorite ? Icons.favorite_rounded : Icons.favorite_border,
+    color: Theme.of(context).colorScheme.primary,
+    size: 30,
+  ),
+),
                 ],
               ),
             ),

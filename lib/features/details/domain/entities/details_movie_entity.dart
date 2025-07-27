@@ -4,6 +4,7 @@ import 'package:movie_app/features/details/data/models/production_company.dart';
 import 'package:movie_app/features/details/data/models/video_model.dart';
 
 class DetailsMovieEntity {
+  final int id;
   final String? backdropPath;
   final String? overview;
   final double? popularity;
@@ -17,8 +18,9 @@ class DetailsMovieEntity {
   final List<Genre>? genres;
   final List<CastModel>? cast;
   final List<VideoModel>? videos;
-  DetailsMovieEntity(
+  DetailsMovieEntity( 
       {required this.backdropPath,
+      required this.id,
       required this.releaseDate,
       required this.genres, 
       required this.cast,

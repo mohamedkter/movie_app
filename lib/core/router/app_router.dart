@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/enums/movie_section.dart';
 import 'package:movie_app/core/router/app_routes.dart';
 import 'package:movie_app/core/services/service_locator.dart';
+import 'package:movie_app/features/auth/email_verification/ui/screen/email_verification_screen.dart';
+import 'package:movie_app/features/auth/signin/ui/screen/signin_screen.dart';
+import 'package:movie_app/features/auth/signin/ui/signin_cubit/signin_cubit.dart';
+import 'package:movie_app/features/auth/signup/ui/screen/signup_screen.dart';
+import 'package:movie_app/features/auth/signup/ui/signup_cubit/signup_cubit.dart';
 import 'package:movie_app/features/details/ui/bloc/movie_details_cubit.dart';
 import 'package:movie_app/features/details/ui/bloc/recommended_movies_cubit.dart';
 import 'package:movie_app/features/details/ui/bloc/similar_movies_cubit.dart';
@@ -47,14 +52,29 @@ class AppRouter {
           ),
         );
       case AppRoutes.viewMoreMoviesScreen:
-      MovieSection section =settings.arguments as MovieSection;
+        MovieSection section = settings.arguments as MovieSection;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => getIt<ViewMoreMoviesCubit>(),
-                  child:  ViewMoreMoviesScreen(
+                  child: ViewMoreMoviesScreen(
                     section: section,
                   ),
                 ));
+      case AppRoutes.signIn:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => SigninCubit(),
+                  child: const SigninScreen(),
+                ));
+      case AppRoutes.signup:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => SignupCubit(),
+                  child: const SignupScreen(),
+                ));
+      case AppRoutes.emailVerification:
+        return MaterialPageRoute(
+            builder: (context) => const EmailVerificationScreen());
 
       default:
         return MaterialPageRoute(

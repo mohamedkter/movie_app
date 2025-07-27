@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movie_app/core/router/app_routes.dart';
 
 class CustomSearchWidget extends StatefulWidget {
   const CustomSearchWidget({
@@ -31,6 +32,12 @@ class _CustomSearchWidgetState extends State<CustomSearchWidget> {
           ),
           TextField(
             controller: query,
+            onTap: () => Navigator.pushNamed(
+              context,
+              AppRoutes.searchScreen,
+          
+            ),
+            readOnly: true,
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium
@@ -62,6 +69,13 @@ class _CustomSearchWidgetState extends State<CustomSearchWidget> {
                   width: 1,
                 ),
               ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.primary,
+                  width: 1,
+                ),
+              ),
             ),
           ),
         ],
@@ -70,21 +84,4 @@ class _CustomSearchWidgetState extends State<CustomSearchWidget> {
   }
 }
 
-class Search extends StatelessWidget {
-  final String query;
 
-  const Search({super.key, required this.query});
-
-  @override
-  Widget build(BuildContext context) {
-    // Implement the search functionality here
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Search Results for '$query'"),
-      ),
-      body: Center(
-        child: Text("Display search results for '$query' here."),
-      ),
-    );
-  }
-}

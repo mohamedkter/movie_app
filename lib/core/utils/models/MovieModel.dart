@@ -3,6 +3,7 @@ import 'package:movie_app/features/home/domain/entities/Movie_entity.dart';
 class MovieModel extends MovieEntity {
   final int id;
   final String? title;
+  final String? original_title;
   final String? poster_path;
   final double? popularity;
   final String? original_language;
@@ -15,6 +16,7 @@ class MovieModel extends MovieEntity {
       {required this.id,
       this.title,
       this.poster_path,
+      this.original_title,
       this.popularity,
       this.video,
       this.release_date,
@@ -27,7 +29,9 @@ class MovieModel extends MovieEntity {
             poster_path: poster_path,
             popularity: popularity,
             vote_average: vote_average,
-            original_language: original_language);
+            original_language: original_language,
+            original_title: original_title
+            );
 
   factory MovieModel.fromMap(Map<String, dynamic> map) {
     return MovieModel(
@@ -39,6 +43,7 @@ class MovieModel extends MovieEntity {
         release_date: map['release_date'],
         backdrop_path: map['backdrop_path'],
         vote_average: map['vote_average'],
+        original_title: map['original_title'],
         original_language: map['original_language']);
   }
 
@@ -52,7 +57,8 @@ class MovieModel extends MovieEntity {
       'release_date': release_date,
       'backdrop_path': backdrop_path,
       'vote_average': vote_average,
-      'original_language': original_language
+      'original_language': original_language,
+      'original_title': original_title
     };
   }
 }

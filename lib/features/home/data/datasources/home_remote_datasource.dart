@@ -7,17 +7,17 @@ class HomeRemoteDataSource {
 
   HomeRemoteDataSource({required this.api});
   Future<List<MovieModel>> getTrendingMovies({required int page}) async {
-    final response = await api.get("/trending/movie/day?language=en-US&page=$page");
+    final response = await api.get("/trending/movie/day?page=$page");
 
     return response["results"].map<MovieModel>((e) => MovieModel.fromMap(e)).toList();
   }
    Future<List<MovieModel>> getUpcomingMovies({required int page}) async {
-    final response = await api.get("/movie/upcoming?language=en-US&page=$page");
+    final response = await api.get("/movie/upcoming?page=$page");
 
     return response["results"].map<MovieModel>((e) => MovieModel.fromMap(e)).toList();
   }
   Future<List<PeopleModel>> getTrendingPerson() async {
-    final response = await api.get("/trending/person/day?language=en-US&page=1");
+    final response = await api.get("/trending/person/day?page=1");
     return response["results"].map<PeopleModel>((e) => PeopleModel.fromJson(e)).toList();
   }
 }

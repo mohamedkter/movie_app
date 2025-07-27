@@ -24,6 +24,11 @@ import 'package:movie_app/features/home/domain/usecases/get_upcoming_movies.dart
 import 'package:movie_app/features/home/presentation/bloc/trending_cubit.dart';
 import 'package:movie_app/features/home/presentation/bloc/trending_people_cubit.dart';
 import 'package:movie_app/features/home/presentation/bloc/upcoming_cubit.dart';
+import 'package:movie_app/features/search/data/datasources/search_remote_datasource.dart';
+import 'package:movie_app/features/search/data/repo/search_repository_impl.dart';
+import 'package:movie_app/features/search/domain/repositories/search_repository.dart';
+import 'package:movie_app/features/search/domain/usecases/get_search_movies.dart';
+import 'package:movie_app/features/search/ui/bloc/search_movies_cubit.dart';
 import 'package:movie_app/features/view_more/actors/data/datasources/actor_remote_dataSource.dart';
 import 'package:movie_app/features/view_more/actors/data/repo/actor_repository_Impl.dart';
 import 'package:movie_app/features/view_more/actors/domain/repo/actor_repository.dart';
@@ -61,6 +66,11 @@ void setupLocator() {
   getIt.registerLazySingleton<ActorRemoteDataSource>(
     () => ActorRemoteDataSourceImpl(api: getIt()),
   );
+//Search
+getIt.registerLazySingleton<SearchRemoteDataSource>(
+    () => SearchRemoteDataSource(api: getIt()),
+  );
+
   //! Repository
   //Home
   getIt.registerLazySingleton<HomeRepository>(
@@ -89,6 +99,15 @@ void setupLocator() {
     ),
   );
 
+  //Search
+  getIt.registerLazySingleton<SearchRepository>(
+    () => SearchRepositoryImpl(
+      remoteDataSource: getIt(),
+      networkInfo: getIt(),
+    ),
+  );
+
+
   //! UseCase
 
   //Home
@@ -112,6 +131,10 @@ void setupLocator() {
   getIt.registerLazySingleton<GetSimilarMovies>(
     () => GetSimilarMovies(repository: getIt()),
   );
+  //Search
+  getIt.registerLazySingleton<GetSearchMovies>(
+    () => GetSearchMovies(repository: getIt()),
+  );
 
 //Show More
   getIt.registerLazySingleton<GetActorsUseCase>(
@@ -127,6 +150,10 @@ void setupLocator() {
   );
   getIt.registerFactory<TrendingPeopleCubit>(
     () => TrendingPeopleCubit(getIt()),
+  );
+  //Search
+  getIt.registerFactory<SearchMoviesCubit>(
+    () => SearchMoviesCubit(getIt()),
   );
 
   //Details
@@ -146,4 +173,5 @@ void setupLocator() {
         getTrendingMovies: getIt(),
         getUpcomingMovies: getIt(),
       ));
+
 }

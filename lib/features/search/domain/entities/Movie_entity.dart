@@ -5,12 +5,10 @@ class MovieEntity {
   final double? popularity;
   final double? vote_average;
   final String? original_language;
-  final String? original_title;
 
-  MovieEntity( {
+  MovieEntity({
     required this.id,
     this.title,
-    this.original_title,
     this.poster_path,
     this.popularity,
     this.vote_average,

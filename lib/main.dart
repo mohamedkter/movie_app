@@ -8,14 +8,17 @@ import 'core/firebase/firebase_service.dart';
 Future main() async {
   // Ensure that plugin services are initialized
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize cache helper
   CacheHelper().init();
   // Initialize Firebases
   await FirebaseService.initialize();
-
+  // Set up service locator
   setupLocator();
 
+ // Run the app with Device Preview enabled
   runApp(DevicePreview(
-    enabled: true, // Set to true to enable Device Preview
+    enabled: true, // Set to true to enable Device Preview or false to disable
     builder: (context) => const MovieApp(),
   ));
 }

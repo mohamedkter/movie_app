@@ -1,7 +1,6 @@
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/core/firebase/firebase_service.dart';
 import 'package:movie_app/core/services/service_locator.dart';
 import 'package:movie_app/core/utils/icons/app_icons.dart';
 import 'package:movie_app/features/favorites/presentation/screens/favorite_screen.dart';
@@ -22,7 +21,7 @@ class _MovieAppState extends State<MovieAppMainScreen> {
     MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) =>  getIt<TrendingCubit>(),
+          create: (context) => getIt<TrendingCubit>(),
         ),
         BlocProvider(
           create: (context) => getIt<UpcomingCubit>(),
@@ -45,26 +44,30 @@ class _MovieAppState extends State<MovieAppMainScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
         child: AppBar(
-            leading: IconButton(
-              onPressed: () {
-                //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Categories()));
-              },
-              icon: const Icon(
-                Icons.grid_view_rounded,
-                color: Colors.white,
-              ),
-            ),
             actions: [
               Container(
-                margin: const EdgeInsets.only(right: 15),
-                child: const CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(
-                      "https://img.freepik.com/premium-photo/young-man-isolated-blue_1368-124991.jpg?semt=ais_hybrid&w=740"),
-                ),
-              )
+                  margin: const EdgeInsets.only(right: 15),
+                  child: const CircleAvatar(
+                    backgroundImage:
+                        AssetImage("assets/images/logo.png"), // أو NetworkImage
+                  ))
             ],
             elevation: 0.0,
             backgroundColor: Theme.of(context).colorScheme.secondaryContainer),
+      ),
+      drawer: MovieDrawer(
+        onLogout: () {
+          // Sign out the user and clear cache
+          FirebaseService.signOut();
+          // Clear the service locator
+          getIt.reset();
+          // Navigate to the login screen
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            '/signIn',
+            (route) => false,
+          );
+        },
       ),
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -94,6 +97,45 @@ class _MovieAppState extends State<MovieAppMainScreen> {
                       ? Theme.of(context).colorScheme.primary
                       : Colors.white),
               label: "Favorites"),
+        ],
+      ),
+    );
+  }
+}
+
+class MovieDrawer extends StatelessWidget {
+  final VoidCallback onLogout;
+
+  const MovieDrawer({super.key, required this.onLogout});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/logo.png"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: null,
+          ),
+          ListTile(
+            leading: const Icon(Icons.search),
+            title: const Text('Search'),
+            onTap: () => Navigator.pushNamed(context, '/searchScreen'),
+          ),
+          const Spacer(),
+          ListTile(
+            leading: const Icon(Icons.logout, color: Colors.red),
+            title: const Text('Log out', style: TextStyle(color: Colors.red)),
+            onTap: () {
+              Navigator.pop(context);
+              onLogout();
+            },
+          ),
         ],
       ),
     );

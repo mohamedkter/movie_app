@@ -25,14 +25,14 @@ class SignInWithGoogleButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                width: 20,
-                height: 20,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/images/google.png"),
-                        fit: BoxFit.cover)),
-              ),
+              // Container(
+              //   width: 20,
+              //   height: 20,
+              //   decoration: const BoxDecoration(
+              //       image: DecorationImage(
+              //           image: AssetImage("assets/images/google.png"),
+              //           fit: BoxFit.cover)),
+              // ),
               const SizedBox(width: 10),
               Text(
                 "Sign In with Google",

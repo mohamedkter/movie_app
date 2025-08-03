@@ -1,31 +1,41 @@
 import 'dart:developer';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:movie_app/core/errors/failure.dart';
 import 'package:movie_app/features/auth/signup/models/signup_user_model.dart';
 
 
 class FirebaseSignupController {
-  static Future<void> signup(SignupUserModel user) async {
+   static Future<Either<Failure, void>> signup(SignupUserModel user) async {
     try {
-      // Step 1: Create user with email and password
-      UserCredential userCredential = await FirebaseAuth.instance
+      final userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-              email: user.email, password: user.password);
+        email: user.email.trim(),
+        password: user.password,
+      );
 
-      await userCredential.user?.updateDisplayName(user.name);
+      await userCredential.user?.updateDisplayName(user.name.trim());
       await userCredential.user?.reload();
+      await userCredential.user?.sendEmailVerification();
 
-      User? updatedUser = FirebaseAuth.instance.currentUser;
-      log("User created: ${updatedUser?.emailVerified}");
+      return const Right(null); // Success
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('Email already exists.');
-      } else {
-        print("FirebaseAuth Error: ${e.message}");
+      switch (e.code) {
+        case 'invalid-email':
+          return Left(Failure(errMessage: 'Invalid email format.'));
+        case 'email-already-in-use':
+          return Left(Failure(errMessage: 'This email is already in use.'));
+        case 'weak-password':
+          return Left(Failure(errMessage: 'The password is too weak.'));
+        case 'operation-not-allowed':
+          return Left(Failure(errMessage: 'Email/password sign-in is not enabled.'));
+        case 'network-request-failed':
+          return Left(Failure(errMessage: 'Please check your internet connection.'));
+        default:
+          return Left(Failure(errMessage: 'Unexpected error: ${e.message}'));
       }
     } catch (e) {
-      print("General Error: $e");
+      return Left(Failure(errMessage: 'Unexpected error: $e'));
     }
   }
-}
+  }

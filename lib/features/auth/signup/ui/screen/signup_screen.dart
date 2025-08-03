@@ -20,23 +20,16 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize the SignupUserModel to hold user data
-    SignupUserModel user;
-    // TextEditingController for the name field
     final TextEditingController nameController = TextEditingController();
-    // TextEditingController for the email field
     final TextEditingController emailController = TextEditingController();
-    // TextEditingController for the password field
     final TextEditingController passwordController = TextEditingController();
 
-    // Function to navigate to the Sign In screen
     void goToSignIn() {
       Navigator.pop(context);
     }
 
-    // Function to handle the sign-up process
     void signUp() {
-      user = SignupUserModel(
+      final user = SignupUserModel(
         name: nameController.text.trim(),
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
@@ -45,75 +38,74 @@ class SignupScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      body: BlocBuilder<SignupCubit, SignupStates>(
-        builder: (context, state) {
-          if (state is SignupLoadingState) {
-            return const CircularProgressIndicator(); // Show loading animation while signing up
-          } else if (state is SignupErrorState) {
-            // Show error message if sign-up fails
-            return Center(
-              child: Text(
-                "${state.error}",
-                style: TextStyle(color: Colors.red),
-              ),
-            );
-          } else if (state is SignupSuccessState) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-             Navigator.of(context).pushNamed(AppRoutes.emailVerification); // Navigate to email verification screen
-            });
-            return const SizedBox();
-          } else {
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: 90.h),
-                  ArrowBackIconButton(onPressed: () => Navigator.of(context).pop()),
-                  const SizedBox(height: 20),
-                  const CustomAuthTitle(
-                    title: 'Register Account',
-                  ),
-                  const SizedBox(height: 10),
-                  const CustomAuthLabel(
-                    label: 'Fill your details Or continue with social media',
-                  ),
-                  const SizedBox(height: 20),
-                  CustomAuthTextInputField(
-                    hintText: 'xxxxxxxx',
-                    label: 'Your Name',
-                    controller: nameController,
-                  ),
-                  const SizedBox(height: 20),
-                  CustomAuthTextInputField(
-                    hintText: 'xyz@gmail.com',
-                    label: 'Email Address',
-                    controller: emailController,
-                  ),
-                  const SizedBox(height: 20),
-                  CustomAuthPasswordInputField(
-                    hintText: '********',
-                    label: 'Password',
-                    controller: passwordController,
-                  ),
-                  const SizedBox(height: 40),
-                  CustomButton(
-                    text: 'Sign Up',
-                    onPressed: signUp,
-                    color: Theme.of(context).colorScheme.primary,
-                    textColor: Theme.of(context).scaffoldBackgroundColor,
-                  ),
-                  const SizedBox(height: 20),
-                  const SignInWithGoogleButton(),
-                  SizedBox(height: 40.h),
-                  RoutingLine(
-                    buttonText: "Log In",
-                    labelText: "Already Have Account?",
-                    onPressed: goToSignIn,
-                  ),
-                  const SizedBox(height: 20),
-                ],
+      body: BlocConsumer<SignupCubit, SignupStates>(
+        listener: (context, state) {
+          if (state is SignupErrorState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.error),
+                backgroundColor: Colors.red,
               ),
             );
           }
+
+          if (state is SignupSuccessState) {
+            Navigator.of(context).pushNamed(AppRoutes.emailVerification);
+          }
+        },
+        builder: (context, state) {
+          if (state is SignupLoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 90.h),
+                ArrowBackIconButton(onPressed: () => Navigator.of(context).pop()),
+                const SizedBox(height: 20),
+                const CustomAuthTitle(title: 'Register Account'),
+                const SizedBox(height: 10),
+                const CustomAuthLabel(
+                  label: 'Fill your details Or continue with social media',
+                ),
+                const SizedBox(height: 20),
+                CustomAuthTextInputField(
+                  hintText: 'xxxxxxxx',
+                  label: 'Your Name',
+                  controller: nameController,
+                ),
+                const SizedBox(height: 20),
+                CustomAuthTextInputField(
+                  hintText: 'xyz@gmail.com',
+                  label: 'Email Address',
+                  controller: emailController,
+                ),
+                const SizedBox(height: 20),
+                CustomAuthPasswordInputField(
+                  hintText: '********',
+                  label: 'Password',
+                  controller: passwordController,
+                ),
+                const SizedBox(height: 40),
+                CustomButton(
+                  text: 'Sign Up',
+                  onPressed: signUp,
+                  color: Theme.of(context).colorScheme.primary,
+                  textColor: Theme.of(context).scaffoldBackgroundColor,
+                ),
+                const SizedBox(height: 20),
+                const SignInWithGoogleButton(),
+                SizedBox(height: 40.h),
+                RoutingLine(
+                  buttonText: "Log In",
+                  labelText: "Already Have Account?",
+                  onPressed: goToSignIn,
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          );
         },
       ),
     );

@@ -34,7 +34,6 @@ A beautiful, modular Flutter application for browsing and favoriting movies. Des
 
 ## 📁 Folder Structure
 
-
 ├── core/ # Constants, enums, services, theme
 ├── firebase/ # Firebase setup
 ├── modules/
@@ -45,9 +44,54 @@ A beautiful, modular Flutter application for browsing and favoriting movies. Des
 ├── shared/ # Reusable widgets and icons
 └── main.dart # App entry point
 
-yaml
-Copy
-Edit
+## 📱 App Screenshots
+
+### 🏠 Home Screen  
+<img src="https://github.com/user-attachments/assets/22b9569a-ccfe-4980-98c0-e5874e643a65" width="350"/>
+
+---
+
+### 🔐 Login & Sign Up  
+**Login**  
+<img src="https://github.com/user-attachments/assets/d0dd899c-bb46-4f4f-907b-48d1641eab26" width="350"/>
+
+**Sign Up**  
+<img src="https://github.com/user-attachments/assets/214a3437-1863-4485-95f8-e37775a1d645" width="350"/>
+
+---
+
+### 🎬 Movie Details  
+<img src="https://github.com/user-attachments/assets/65c70db7-0eaf-4a5b-a325-e98e5e4e944f" width="350"/>
+<img src="https://github.com/user-attachments/assets/1e51b949-e576-42ad-9f42-30247ca64ea1" width="350"/>
+<img src="https://github.com/user-attachments/assets/ed7def7b-0662-4aa0-b172-c18244d0cf86" width="350"/>
+
+---
+
+### ⭐ Movie Stars  
+<img src="https://github.com/user-attachments/assets/16ccb24c-8fe3-4bc8-a50e-5504c4f85c7f" width="350"/>
+
+---
+
+### ❤️ Favorite Screen  
+<img src="https://github.com/user-attachments/assets/6d62bff3-c951-4073-8e72-03dcdcef4277" width="350"/>
+
+---
+
+### 🔍 Search Screens  
+<img src="https://github.com/user-attachments/assets/c71ef173-05e9-404d-b150-26e6224eca79" width="350"/>
+<img src="https://github.com/user-attachments/assets/2a9d0d51-9489-4382-8aaf-16d7926fc302" width="350"/>
+
+---
+
+### 📂 Show All & Drawer  
+<img src="https://github.com/user-attachments/assets/fda71770-0734-4543-92e5-b0dd8bb5a34e" width="350"/>
+<img src="https://github.com/user-attachments/assets/7dbc2aa2-0eca-404a-bb4a-d87ce14a490d" width="350"/>
+
+---
+
+### 🎞️ Movie V  
+<img src="https://github.com/user-attachments/assets/87b9652e-87e3-4c0f-9045-29ed4b59f45b" width="350"/>
+
 
 ---
 
@@ -88,65 +132,6 @@ Variant: #16121F
  Unit & widget testing
 
  Offline mode with full caching
-
-📷 Screenshots
-
-## 📱 App Screenshots
-
-### 🏠 Home Screen
-![Home Screen](screenshots/HomeScreen.jpg)
-
----
-
-### 🔐 Login & Sign Up
-#### 🔑 Login
-![Login](screenshots/login.jpg)
-
-#### 🆕 Sign Up
-![Sign Up](screenshots/signUp.jpg)
-
----
-
-### 🎬 Movie Details
-#### Movie D1
-![Movie D1](screenshots/movieD1.jpg)
-#### Movie D2
-![Movie D2](screenshots/movieD2.jpg)
-#### Movie D3
-![Movie D3](screenshots/movieD3.jpg)
-
----
-
-### ⭐ Movie Stars
-![Movie Stars](screenshots/movieStars.jpg)
-
----
-
-### ❤️ Favorite Screen
-![Favorite](screenshots/Fav1.jpg)
-
----
-
-### 🔍 Search Screens
-#### Search 1
-![Search 1](screenshots/search1.jpg)
-#### Search 2
-![Search 2](screenshots/search2.jpg)
-
----
-
-### 📂 Show All & Drawer
-#### Show All
-![Show All](screenshots/showall.jpg)
-
-#### Drawer
-![Drawer](screenshots/drawer.jpg)
-
----
-
-### 🎞️ Movie V
-![Movie V](screenshots/movieV.jpg)
-
 
 
 
